@@ -37,5 +37,6 @@
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 5px;
+    margin-bottom: 0.3rem;
   }
 </style>
