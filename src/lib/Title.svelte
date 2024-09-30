@@ -1,10 +1,15 @@
 <script>
-  let title = "";
+  import { title } from "./store.js";
+  import { onMount } from "svelte";
+
+  onMount(() => {
+    $title = localStorage.getItem("title");
+  });
 </script>
 
 <div>
   <label for="title">Title</label>
-  <input type="text" id="title" name="title" bind:value={title} />
+  <input type="text" id="title" name="title" bind:value={$title} />
 </div>
 
 <style>

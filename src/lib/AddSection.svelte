@@ -1,12 +1,7 @@
 <script>
-  import Description from "./Description.svelte";
+  import { extraSections } from "./store";
   function addSection() {
-    const newSection = new Description({
-      target: document.getElementById("inputs"),
-      props: {
-        heading: "Additional Section",
-      },
-    });
+    $extraSections = [...$extraSections, { id: Date.now(), value: "" }];
   }
 </script>
 
@@ -15,7 +10,7 @@
 </div>
 
 <style>
-  button {
+  :global(button) {
     background-color: rgb(173, 133, 86);
     color: #fafafa;
     border: none;
@@ -25,7 +20,7 @@
     display: inline-block;
     font-size: 0.9rem;
   }
-  button:hover {
+  :global(button:hover) {
     background-color: rgb(173, 133, 86, 0.9);
   }
 </style>

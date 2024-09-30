@@ -1,17 +1,35 @@
 <script>
   import Title from "./lib/Title.svelte";
   import Description from "./lib/Description.svelte";
-  import Button from "./lib/Button.svelte";
+  import AddSection from "./lib/AddSection.svelte";
+  import Save from "./lib/Save.svelte";
+  import Clear from "./lib/Clear.svelte";
+  import { description, extraSections } from "./lib/store";
+  import { onMount } from "svelte";
+
+  onMount(() => {
+    if (localStorage.getItem("extraSections") != null) {
+      $extraSections = JSON.parse(localStorage.getItem("extraSections"));
+    }
+    $description = localStorage.getItem("description");
+    console.log(JSON.parse(localStorage.getItem("extraSections")));
+  });
 </script>
 
 <div class="container">
   <h1>CFP Character Counter</h1>
   <div class="inputs" id="inputs">
     <Title />
-    <Description heading="Description" />
-    <Description heading="Benefits to ecosystem" />
+    <Description bind:text={$description} />
+    {#each $extraSections as section (section.id)}
+      <Description heading="Additional Section" bind:text={section.value} />
+    {/each}
   </div>
-  <Button />
+  <div class="btns">
+    <AddSection />
+    <Save />
+    <Clear />
+  </div>
 </div>
 
 <style>
@@ -31,6 +49,10 @@
     flex-direction: column;
     gap: 1rem;
     margin-bottom: 1rem;
+  }
+  .btns {
+    display: flex;
+    gap: 1rem;
   }
   h1 {
     margin-top: 1rem;

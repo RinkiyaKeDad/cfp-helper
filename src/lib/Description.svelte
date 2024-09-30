@@ -1,15 +1,18 @@
 <script>
   let count = 0;
   let words = 0;
-  let text = "";
-  function handleKeyUp() {
+  function handleKeyUp(dummy) {
     count = text.length;
     words = text.trim().split(/\s+/).length;
     if (text.length == 0) {
       words = 0;
     }
   }
-  export let heading;
+  // whenever text changes (when loading from localstorage)
+  // we want to rerun handleKeyUp
+  $: handleKeyUp(text);
+  export let text = "";
+  export let heading = "Description";
 </script>
 
 <div>
