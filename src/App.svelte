@@ -11,7 +11,9 @@
     if (localStorage.getItem("extraSections") != null) {
       $extraSections = JSON.parse(localStorage.getItem("extraSections"));
     }
-    $description = localStorage.getItem("description");
+    if (localStorage.getItem("description") != null) {
+      $description = localStorage.getItem("description");
+    }
     console.log(JSON.parse(localStorage.getItem("extraSections")));
   });
 </script>

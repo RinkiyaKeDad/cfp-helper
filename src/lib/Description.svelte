@@ -1,28 +1,21 @@
 <script>
   let count = 0;
   let words = 0;
-  function handleKeyUp(dummy) {
+  function handleKeyUp() {
     count = text.length;
     words = text.trim().split(/\s+/).length;
     if (text.length == 0) {
       words = 0;
     }
   }
-  // whenever text changes (when loading from localstorage)
-  // we want to rerun handleKeyUp
-  $: handleKeyUp(text);
+  $: text, handleKeyUp();
   export let text = "";
   export let heading = "Description";
 </script>
 
 <div>
   <label for="title">{heading}</label>
-  <textarea
-    on:keyup={handleKeyUp}
-    id="description"
-    name="description"
-    bind:value={text}
-  ></textarea>
+  <textarea id="description" name="description" bind:value={text}></textarea>
   <p>Characters: {count}</p>
   <p>Words: {words}</p>
 </div>
